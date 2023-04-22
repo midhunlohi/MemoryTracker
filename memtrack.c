@@ -52,3 +52,19 @@ add_struct_to_struct_db(struct_db_t* db, struct_db_rec_t* rec) {
     db->count++;
     return 0;
 }
+
+/*DB lookup function*/
+struct_db_rec_t*
+struct_db_look_up(struct_db_t *db, char *name) {
+    if (!db || !name) {
+        return NULL;
+    }
+    struct_db_rec_t* rec = db->head;
+    while(rec) {
+        if (!strncmp(rec->struct_name, name, MAX_STRUCT_NAME_SIZE)) {
+            return rec;
+        }
+        rec = rec->next;
+    }
+    return NULL;
+}

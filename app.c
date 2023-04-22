@@ -50,5 +50,17 @@ main() {
     REGISTER_STRUCT_TO_DB(db, student_t, struct_student_members);    
     /*Print full DB*/
     print_struct_db(db);
+#ifdef TEST
+    /*Lookup*/
+    if (struct_db_look_up(db, "student_t")) {
+        printf("student is present in DB\n");
+    }
+    if (struct_db_look_up(db, "emp_t")) {
+        printf("emp is present in DB\n");
+    }
+    if (!struct_db_look_up(db, "comp_t")) {
+        printf("comp is not present in DB\n");
+    }    
+#endif
     return 0;
 }

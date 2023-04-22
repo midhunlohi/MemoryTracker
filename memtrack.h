@@ -58,15 +58,6 @@ typedef struct struct_db_{
     struct_db_rec_t *head;
     unsigned int count;
 }struct_db_t;
-/*Print a structure record in the db*/
-void
-print_struct_db_rec(struct_db_rec_t*);
-/*Print a complete db*/
-void
-print_struct_db(struct_db_t*);
-/*Add a struct to struct db*/
-int
-add_struct_to_struct_db(struct_db_t*, struct_db_rec_t*);
 /*Helper MACROs*/
 #define POPULATE_STRUCT_MEMBER_INFO(struct_name, member_name, data_type, nested_struct_name) \
     {#member_name, data_type, FIELD_SIZE(struct_name, member_name), \
@@ -83,5 +74,21 @@ add_struct_to_struct_db(struct_db_t*, struct_db_rec_t*);
             assert(0);                                                       \
         }                                                                     \
     }while(0);                                                                  \
+
+/*Print a structure record in the db*/
+void
+print_struct_db_rec(struct_db_rec_t*);
+
+/*Print a complete db*/
+void
+print_struct_db(struct_db_t*);
+
+/*Add a struct to struct db*/
+int
+add_struct_to_struct_db(struct_db_t*, struct_db_rec_t*);
+
+/*Lookup function*/
+struct_db_rec_t*
+struct_db_look_up(struct_db_t *struct_db, char *struct_name);
 
 #endif
