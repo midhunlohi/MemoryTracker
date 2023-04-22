@@ -33,6 +33,7 @@ print_struct_db(struct_db_t* db) {
         printf("structure number = %d\n", count);
         print_struct_db_rec(rec);
         rec = rec->next;
+        count++;
     }
     return;
 }

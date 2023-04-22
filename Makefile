@@ -2,8 +2,8 @@
 CC = gcc
 
 # Object files go into $(OBJDIR), executables go into $DISTDIR
-OBJDIR = build
-DISTDIR = dist
+OBJDIR = $(PWD)/build
+DISTDIR = $(PWD)/dist
 
 # Uncomment next line to overwrite standard malloc library
 # WRAP = -Wl,--wrap=malloc -Wl,--wrap=free -Wl,--wrap=calloc -Wl,--wrap=realloc -Wl,--wrap=malloc_usable_size
@@ -33,7 +33,7 @@ all: libx app
 # link the object files into an executable (app)
 app: $(APP_OFILES)
 	mkdir -p $(DISTDIR)
-	$(CC) $(LFLAGS) $(APP_OFILES) -L dist -lx -o $(DISTDIR)/app
+	$(CC) $(LFLAGS) $(APP_OFILES) -L $(DISTDIR) -lx -o $(DISTDIR)/app
 
 # $(OBJDIR) is an order-only prerequisite:
 # only compile if $(OBJDIR) does not exist yet and

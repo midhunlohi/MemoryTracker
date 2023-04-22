@@ -1,6 +1,9 @@
 #ifndef __MEMTRACK__H
 #define __MEMTRACK__H
 
+#include <string.h>
+#include <assert.h>
+
 #define MAX_STRUCT_NAME_SIZE 128
 #define MAX_MEMBER_NAME_SIZE 128
 
@@ -69,11 +72,11 @@ add_struct_to_struct_db(struct_db_t*, struct_db_rec_t*);
     {#member_name, data_type, FIELD_SIZE(struct_name, member_name), \
     OFFSETOF(struct_name, member_name), #nested_struct_name} \
 
-#define REGISTER_STRUCT_TO_DB(struct_db, struct_name, member_arr) \
+#define REGISTER_STRUCT_TO_DB(struct_db, name, member_arr) \
     do{                                                                     \
         struct_db_rec_t* rec = calloc(1, sizeof(struct_db_rec_t));          \
-        strncpy(rec->struct_name, #struct_name, MAX_STRUCT_NAME_SIZE);      \
-        rec->size = sizeof(struct_name);                                    \
+        strncpy(rec->struct_name, #name, MAX_STRUCT_NAME_SIZE);      \
+        rec->size = sizeof(name);                                    \
         rec->num_member = sizeof(member_arr)/sizeof(struct_member_info_t);  \
         rec->members = member_arr;                                           \
         if (add_struct_to_struct_db(struct_db, rec)) {                      \
