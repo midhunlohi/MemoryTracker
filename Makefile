@@ -27,13 +27,13 @@ $(OBJDIR)/%.o : %.c $(HFILES) $(CFILES) $(APP_CFILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Consider these targets as targets, not files
-.PHONY : all libx clean
-all: libx app
+.PHONY : all libmtrack clean
+all: libmtrack app
 # Build everything: compile all C (changed) files and
 # link the object files into an executable (app)
 app: $(APP_OFILES)
 	mkdir -p $(DISTDIR)
-	$(CC) $(LFLAGS) $(APP_OFILES) -L $(DISTDIR) -lx -o $(DISTDIR)/app
+	$(CC) $(LFLAGS) $(APP_OFILES) -L $(DISTDIR) -lmtrack -o $(DISTDIR)/app
 
 # $(OBJDIR) is an order-only prerequisite:
 # only compile if $(OBJDIR) does not exist yet and
@@ -45,9 +45,9 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 # Build shared library, copy library header file to $(DISTDIR)
-libx: $(OFILES)
+libmtrack: $(OFILES)
 	mkdir -p $(DISTDIR)
-	$(CC) $(LFLAGS) $(WRAP) $(OFILES) -shared -o $(DISTDIR)/libx.so
+	$(CC) $(LFLAGS) $(WRAP) $(OFILES) -shared -o $(DISTDIR)/libmtrack.so
 
 # Clean up by removing the $(OBJDIR) and $(DISTDIR) directories
 clean:
